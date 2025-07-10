@@ -45,7 +45,7 @@ public class Starwars {
         Assert.assertEquals(totalCount, expectedCount);
 
         if (expectedCount == totalCount) {
-            System.out.println("Count validated successfully");
+            System.out.println("Count validated successfully.");
         } else {
             System.out.println("Count mismatch!");
         }
