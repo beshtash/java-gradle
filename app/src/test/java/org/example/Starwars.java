@@ -104,7 +104,6 @@ public class Starwars {
 
     @Test
     public void printHeightAbove170() {
-
         String nextPageUrl = "https://swapi.dev/api/people";
 
         while (nextPageUrl != null) {
