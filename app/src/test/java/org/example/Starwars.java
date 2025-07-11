@@ -131,7 +131,5 @@ public class Starwars {
             nextPageUrl = json.optString("next", null);
 
         }
-
-
     }
 }
