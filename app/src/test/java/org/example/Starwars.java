@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Map;
 
@@ -99,5 +100,39 @@ public class Starwars {
                 System.out.println(result.get("created"));
             }
         }
+    }
+
+    @Test
+    public void printHeightAbove170() {
+
+        String nextPageUrl = "https://swapi.dev/api/people";
+
+        while (nextPageUrl != null) {
+
+            RestAssured.useRelaxedHTTPSValidation();
+            Response response = RestAssured.get(nextPageUrl);
+            JSONObject json = new JSONObject(response.asString());
+            JSONArray results = json.getJSONArray("results");
+            for (int i =0; i < results.length(); i++) {
+                JSONObject character = results.getJSONObject(i);
+                String heightStr = character.getString("height");
+
+                if (!heightStr.equalsIgnoreCase("unknown")) {
+                    try {
+                        int height = Integer.parseInt(heightStr);
+                        if (height > 172) {
+                            System.out.println(character.getString("name") + " - Height: " + height );
+                        }
+                    } catch (NumberFormatException e) {
+                        
+                    }
+                }
+            }
+
+            nextPageUrl = json.optString("next", null);
+
+        }
+
+
     }
 }
